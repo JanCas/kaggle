@@ -127,3 +127,5 @@ dmypy.json
 
 #pneumonia
 pneumonia/chest_xray/
+pneumonia/weights/
+pneumonia/model/
