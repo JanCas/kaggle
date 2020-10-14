@@ -1,5 +1,5 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD, RMSprop
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.metrics import Recall, Precision
@@ -19,7 +19,7 @@ BASE_DIR = getcwd()
 datagen = ImageDataGenerator(rescale=1. / 255, dtype=tf.dtypes.float16)
 train_generator = datagen.flow_from_directory(BASE_DIR + '\\chest_xray\\train\\', target_size=(227, 227), batch_size=16,
                                               color_mode='grayscale')
-test_generator = datagen.flow_from_directory(BASE_DIR + '\\chest_xray\\test\\', target_size=(227, 227), batch_size=128,
+test_generator = datagen.flow_from_directory(BASE_DIR + '\\chest_xray\\test\\', target_size=(227, 227), batch_size=16,
                                              color_mode='grayscale')
 val_generator = datagen.flow_from_directory(BASE_DIR + '\\chest_xray\\val\\', target_size=(227, 227), batch_size=16,
                                             color_mode='grayscale')
@@ -28,7 +28,7 @@ val_generator = datagen.flow_from_directory(BASE_DIR + '\\chest_xray\\val\\', ta
 # %%
 
 # AlexNet
-def AlexNet(weights=None):
+def AlexNet(weights=None) -> Sequential:
     '''
     keras implementation of AlexNet
     :param weights: path to preloaded weights. If none starts with random weights
@@ -71,10 +71,9 @@ def AlexNet(weights=None):
 
     return model
 
-
 # %%
 
-# training the model
+# training the Alex Net
 model = AlexNet()
 
 optimizer = SGD(lr=.01)
@@ -86,8 +85,8 @@ METRICS = [
 
 log_dir = "logs/fit/"
 callbacks = [
-    EarlyStopping(monitor='loss', patience=3),
-    #TensorBoard(log_dir=log_dir, histogram_freq=1)
+    EarlyStopping(monitor='loss', patience=2),
+    # TensorBoard(log_dir=log_dir, histogram_freq=1)
 ]
 
 model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=METRICS)
@@ -95,7 +94,7 @@ model.summary()
 
 model.fit(
     train_generator,
-    epochs=50,
+    epochs=30,
     steps_per_epoch=320,
     validation_data=val_generator,
     callbacks=callbacks
