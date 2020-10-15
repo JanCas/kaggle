@@ -129,3 +129,6 @@ dmypy.json
 pneumonia/chest_xray/
 pneumonia/weights/
 pneumonia/model/
+
+#digits
+HandDigits/digit-recognizer/

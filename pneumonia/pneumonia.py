@@ -98,7 +98,7 @@ model.fit(
     steps_per_epoch=320,
     validation_data=val_generator,
     callbacks=callbacks
-)
+    )
 
 model.evaluate(test_generator)
 
