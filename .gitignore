@@ -132,3 +132,4 @@ pneumonia/model/
 
 #digits
 HandDigits/digit-recognizer/
+*.csv

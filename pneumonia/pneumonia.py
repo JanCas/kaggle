@@ -1,9 +1,9 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.optimizers import SGD, RMSprop
+from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.metrics import Recall, Precision
-from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
+from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.compat.v1 import ConfigProto, Session
 import tensorflow as tf
 
