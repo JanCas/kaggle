@@ -1,4 +1,9 @@
 # %%
+'''
+This is the MNIST Digit dataset
+https://www.kaggle.com/c/digit-recognizer
+'''
+
 
 import pandas as pd
 
@@ -72,7 +77,7 @@ def LeNet5(input: Input) -> Sequential:
     model.add(MaxPooling2D(pool_size=2, strides=2))
 
     model.add(Conv2D(filters=128, strides=1, kernel_size=3, activation='relu'))
-    # model.add(BatchNormalization())
+    model.add(BatchNormalization())
 
     model.add(Flatten())
     # fully connected layers
@@ -106,7 +111,7 @@ lenet.compile(loss='categorical_crossentropy', optimizer=opt, metrics=METRICS)
 lenet.summary()
 history = lenet.fit(
     train_data,
-    epochs=10,
+    epochs=50,
     steps_per_epoch=floor(train_data.n / train_data.batch_size),
     validation_data=val_data,
     callbacks=callbacks

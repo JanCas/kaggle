@@ -1,3 +1,8 @@
+'''
+kaggle dataset of xray data with pnuemonia and not
+https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
+'''
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
